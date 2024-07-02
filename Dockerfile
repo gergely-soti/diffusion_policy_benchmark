@@ -65,18 +65,15 @@ USER root
 RUN apt-get update && apt-get install -y curl
 USER $USER
 
-COPY --chown=jovyan:jovyan Miniforge3-Linux-x86_64.sh /home/$USER/workspace
 COPY --chown=jovyan:jovyan conda_environment.yaml /home/$USER/workspace
 USER root
 RUN conda update -n base -c conda-forge conda
 USER $USER
-RUN bash Miniforge3-Linux-x86_64.sh -b
+RUN curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+RUN bash Miniforge3-$(uname)-$(uname -m).sh -b
 RUN eval "$(/home/jovyan/miniforge3/bin/conda shell.bash hook)" && \
     mamba env create -f conda_environment.yaml
 #RUN conda env create -f conda_environment.yaml
-#RUN curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh" \
-#      bash Miniforge3-Linux-x86_64.sh
-#
 #RUN mamba env create -f conda_environment.yaml
 
 CMD ["bash"]
