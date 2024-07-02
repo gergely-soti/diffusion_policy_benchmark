@@ -75,6 +75,18 @@ class TrainDiffusionUnetHybridWorkspace(BaseWorkspace):
         train_dataloader = DataLoader(dataset, **cfg.dataloader)
         normalizer = dataset.get_normalizer()
 
+        print(f"Dataset keys: {dataset[0].keys()}")
+        print(f"obs keys: {dataset[0]['obs'].keys()}")
+        print(f"image shape: {dataset[0]['obs']['image'].shape}")
+        print(f"agent_pos shape: {dataset[0]['obs']['agent_pos'].shape}")
+        print(f"actions shape: {dataset[0]['action'].shape}")
+        exit()
+        # Dataset keys: dict_keys(['obs', 'action'])
+        #   obs keys: dict_keys(['image', 'agent_pos'])
+        #     image shape: torch.Size([16, 3, 96, 96])
+        #     agent_pos shape: torch.Size([16, 2])
+        #   actions shape: torch.Size([16, 2])
+
         # configure validation dataset
         val_dataset = dataset.get_validation_dataset()
         val_dataloader = DataLoader(val_dataset, **cfg.val_dataloader)

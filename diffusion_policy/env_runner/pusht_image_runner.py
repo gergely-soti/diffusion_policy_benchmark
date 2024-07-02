@@ -7,6 +7,7 @@ import tqdm
 import dill
 import math
 import wandb.sdk.data_types.video as wv
+import cv2
 from diffusion_policy.env.pusht.pusht_image_env import PushTImageEnv
 from diffusion_policy.gym_util.async_vector_env import AsyncVectorEnv
 # from diffusion_policy.gym_util.sync_vector_env import SyncVectorEnv
@@ -184,6 +185,16 @@ class PushTImageRunner(BaseImageRunner):
             while not done:
                 # create obs dict
                 np_obs_dict = dict(obs)
+                print(np_obs_dict['image'].shape)
+                for i in range(np_obs_dict['image'].shape[1]):
+                    img = np_obs_dict['image'][0, i, ...]
+                    reshaped_img = np.moveaxis(img, 0, -1)
+                    window_name = f'image-{i}'
+                    cv2.imshow(window_name, reshaped_img)
+                    cv2.waitKey(1)
+
+                print(np_obs_dict['agent_pos'].shape)
+
                 if self.past_action and (past_action is not None):
                     # TODO: not tested
                     np_obs_dict['past_action'] = past_action[
@@ -193,7 +204,6 @@ class PushTImageRunner(BaseImageRunner):
                 obs_dict = dict_apply(np_obs_dict, 
                     lambda x: torch.from_numpy(x).to(
                         device=device))
-
                 # run policy
                 with torch.no_grad():
                     action_dict = policy.predict_action(obs_dict)
@@ -203,7 +213,7 @@ class PushTImageRunner(BaseImageRunner):
                     lambda x: x.detach().to('cpu').numpy())
 
                 action = np_action_dict['action']
-
+                print(action.shape)
                 # step env
                 obs, reward, done, info = env.step(action)
                 done = np.all(done)

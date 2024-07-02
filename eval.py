@@ -43,7 +43,10 @@ def main(checkpoint, output_dir, device):
     device = torch.device(device)
     policy.to(device)
     policy.eval()
-    
+
+    # override n_envs in fg.task.env_runner
+    cfg.task.env_runner.n_envs = 1
+
     # run eval
     env_runner = hydra.utils.instantiate(
         cfg.task.env_runner,
