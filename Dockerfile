@@ -73,7 +73,5 @@ RUN curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/downloa
 RUN bash Miniforge3-$(uname)-$(uname -m).sh -b
 RUN eval "$(/home/jovyan/miniforge3/bin/conda shell.bash hook)" && \
     mamba env create -f conda_environment.yaml
-#RUN conda env create -f conda_environment.yaml
-#RUN mamba env create -f conda_environment.yaml
 
 CMD ["bash"]
