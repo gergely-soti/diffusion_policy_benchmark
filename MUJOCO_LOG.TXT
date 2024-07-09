@@ -1,0 +1,24 @@
+Mon Jul  8 17:15:06 2024
+ERROR: GLEW initalization error: Missing GL version
+
+Mon Jul  8 17:28:56 2024
+ERROR: GLEW initalization error: Missing GL version
+
+Mon Jul  8 17:47:58 2024
+ERROR: GLEW initalization error: Missing GL version
+
+Mon Jul  8 17:48:33 2024
+ERROR: GLEW initalization error: Missing GL version
+
+Mon Jul  8 17:53:55 2024
+ERROR: GLEW initalization error: Missing GL version
+
+Mon Jul  8 17:54:20 2024
+ERROR: Shadow framebuffer is not complete, error 0x8cd7
+
+Mon Jul  8 17:56:38 2024
+ERROR: Shadow framebuffer is not complete, error 0x8cd7
+
+Mon Jul  8 18:00:09 2024
+ERROR: GLEW initalization error: Missing GL version
+

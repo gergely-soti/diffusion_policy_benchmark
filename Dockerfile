@@ -74,4 +74,11 @@ RUN bash Miniforge3-$(uname)-$(uname -m).sh -b
 RUN eval "$(/home/jovyan/miniforge3/bin/conda shell.bash hook)" && \
     mamba env create -f conda_environment.yaml
 
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
+
+USER root
+RUN apt-get update && apt-get install -y libglew-dev
+USER $USER
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLX.so
 CMD ["bash"]

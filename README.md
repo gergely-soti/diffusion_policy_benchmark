@@ -51,6 +51,10 @@ cd diffusion_policy
 python train.py --config-dir=. --config-name=image_pusht_diffusion_policy_cnn.yaml training.seed=42 training.device=cuda:0 hydra.run.dir='data/outputs/${now:%Y.%m.%d}/${now:%H.%M.%S}_${name}_${task_name}'
 ```
 
+```bash
+python eval.py --checkpoint data/outputs/2024.07.04/17.46.50_train_diffusion_unet_hybrid_lift_image/checkpoints/latest.ckpt --output_dir data/lift_eval_1 --device cuda:0
+```
+
 ## 🛝 Try it out!
 
 Our self-contained Google Colab notebooks is the easiest way to play with Diffusion Policy. We provide separate
