@@ -40,6 +40,14 @@ conda activate robodiff
 ```
 
 ```bash
+cd robomimic && pip install -r requirements.txt  && cd ..
+```
+
+```bash
+cd robosuite && pip install -e . && cd ..
+```
+
+```bash
 wandb login
 ```
 

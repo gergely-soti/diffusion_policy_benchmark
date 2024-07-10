@@ -81,4 +81,18 @@ USER root
 RUN apt-get update && apt-get install -y libglew-dev
 USER $USER
 ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLX.so
+
+##############################################################################
+##                                 Manipulation Tasks                       ##
+##############################################################################
+FROM diffusion-policy as tf-manipulation-tasks
+
+COPY --chown=$USER:$USER ./dependencies /home/$USER/workspace/dependencies
+RUN cd /home/$USER/workspace/dependencies/manipulation_tasks && \
+    pip install .
+
+RUN pip install --no-cache-dir loguru
+RUN pip install --no-cache-dir matplotlib
+RUN pip install hydra-core --upgrade
+
 CMD ["bash"]
